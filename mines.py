@@ -17,7 +17,8 @@ class Board:
     def clear(self):
         for c in self.cells:
             for cc in c:
-                cc.btn.destroy()
+                if(cc.mine):
+                    cc.btn.config(text="X", state=DISABLED)
     def populate(self):
         for i in range(rows):
             root.grid_rowconfigure(i,  weight =1)
@@ -29,7 +30,7 @@ class Cell:
     def button_click(self,x):
         print(f'Coords: {x}')
         if(self.mine):
-            self.btn.config(text="X", state=DISABLED)
+            board.clear()
             """ board.clear() """
         else:
             cont = count(self, board)
